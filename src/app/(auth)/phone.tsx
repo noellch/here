@@ -23,7 +23,8 @@ export default function PhoneScreen() {
       confirmationResult = await sendOTP(phone)
       router.push({ pathname: '/(auth)/otp', params: { phone } })
     } catch (error: any) {
-      Alert.alert('Error', error.message)
+      console.error('sendOTP error:', JSON.stringify(error, null, 2))
+      Alert.alert('Error', `${error.code ?? 'unknown'}: ${error.message}`)
     } finally {
       setLoading(false)
     }

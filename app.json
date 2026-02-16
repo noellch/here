@@ -3,7 +3,7 @@
     "name": "Here",
     "slug": "here",
     "version": "1.0.0",
-    "scheme": "here",
+    "scheme": ["here", "com.googleusercontent.apps.324734787029-k4tncjavdishi6fjehm75k4hku336bgl"],
     "platforms": ["ios"],
     "ios": {
       "bundleIdentifier": "com.here.app",
