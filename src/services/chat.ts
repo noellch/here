@@ -11,7 +11,7 @@ export async function getChatRoom(chatRoomId: string): Promise<ChatRoom | null> 
 
 export function subscribeToChatRooms(
   userId: string,
-  callback: (rooms: ChatRoom[]) => void
+  callback: (rooms: ChatRoom[]) => void,
 ): () => void {
   return chatRoomsRef
     .where('participants', 'array-contains', userId)
@@ -27,7 +27,7 @@ export function subscribeToChatRooms(
 
 export function subscribeToMessages(
   chatRoomId: string,
-  callback: (messages: ChatMessage[]) => void
+  callback: (messages: ChatMessage[]) => void,
 ): () => void {
   return chatRoomsRef
     .doc(chatRoomId)
@@ -45,7 +45,7 @@ export function subscribeToMessages(
 export async function sendMessage(
   chatRoomId: string,
   senderId: string,
-  text: string
+  text: string,
 ): Promise<void> {
   await chatRoomsRef.doc(chatRoomId).collection('messages').add({
     senderId,
@@ -56,10 +56,7 @@ export async function sendMessage(
 }
 
 export async function getChatRoomByWaveId(waveId: string): Promise<ChatRoom | null> {
-  const snapshot = await chatRoomsRef
-    .where('waveId', '==', waveId)
-    .limit(1)
-    .get()
+  const snapshot = await chatRoomsRef.where('waveId', '==', waveId).limit(1).get()
   if (snapshot.empty) return null
   const doc = snapshot.docs[0]
   return { id: doc.id, ...doc.data() } as ChatRoom

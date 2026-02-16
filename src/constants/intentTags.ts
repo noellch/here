@@ -78,5 +78,5 @@ export const INTENT_TAGS: IntentTagConfig[] = [
 ]
 
 export const INTENT_TAG_MAP = Object.fromEntries(
-  INTENT_TAGS.map((tag) => [tag.key, tag])
+  INTENT_TAGS.map((tag) => [tag.key, tag]),
 ) as Record<IntentTag, IntentTagConfig>

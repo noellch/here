@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "import", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "react/no-direct-mutation-state": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-key": "error",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "react": {
+      "formComponents": [],
+      "linkComponents": [],
+      "version": "19.1",
+      "componentWrapperFunctions": []
+    }
+  },
+  "env": {
+    "builtin": true
+  },
+  "globals": {
+    "__DEV__": "readonly"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".expo",
+    "android",
+    "ios",
+    "dist",
+    "build",
+    "functions"
+  ]
+}

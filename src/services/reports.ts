@@ -7,11 +7,13 @@ export async function submitReport(data: {
   category: ReportCategory
   chatRoomId?: string
 }): Promise<void> {
-  await firestore().collection('reports').add({
-    ...data,
-    createdAt: firestore.FieldValue.serverTimestamp(),
-    status: 'pending',
-  })
+  await firestore()
+    .collection('reports')
+    .add({
+      ...data,
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      status: 'pending',
+    })
 }
 
 export async function submitFeedback(data: {
@@ -19,8 +21,10 @@ export async function submitFeedback(data: {
   chatRoomId: string
   rating: FeedbackRating
 }): Promise<void> {
-  await firestore().collection('feedback').add({
-    ...data,
-    createdAt: firestore.FieldValue.serverTimestamp(),
-  })
+  await firestore()
+    .collection('feedback')
+    .add({
+      ...data,
+      createdAt: firestore.FieldValue.serverTimestamp(),
+    })
 }

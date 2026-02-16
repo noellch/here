@@ -6,7 +6,7 @@ export async function sendOTP(phoneNumber: string): Promise<FirebaseAuthTypes.Co
 
 export async function confirmOTP(
   confirmation: FirebaseAuthTypes.ConfirmationResult,
-  code: string
+  code: string,
 ): Promise<FirebaseAuthTypes.UserCredential> {
   return confirmation.confirm(code)
 }
@@ -16,7 +16,7 @@ export async function signOut(): Promise<void> {
 }
 
 export function onAuthStateChanged(
-  callback: (user: FirebaseAuthTypes.User | null) => void
+  callback: (user: FirebaseAuthTypes.User | null) => void,
 ): () => void {
   return auth().onAuthStateChanged(callback)
 }

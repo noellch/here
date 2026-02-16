@@ -5,7 +5,7 @@ const usersRef = firestore().collection('users')
 
 export async function createUser(
   uid: string,
-  data: { phone: string; displayName: string; avatar: string; age: number }
+  data: { phone: string; displayName: string; avatar: string; age: number },
 ): Promise<void> {
   await usersRef.doc(uid).set({
     uid,
@@ -27,7 +27,7 @@ export async function getUser(uid: string): Promise<User | null> {
 
 export async function updateProfile(
   uid: string,
-  data: Partial<Pick<User, 'displayName' | 'avatar' | 'bio'>>
+  data: Partial<Pick<User, 'displayName' | 'avatar' | 'bio'>>,
 ): Promise<void> {
   await usersRef.doc(uid).update(data)
 }

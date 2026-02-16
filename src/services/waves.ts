@@ -34,7 +34,7 @@ export async function acceptWave(waveId: string): Promise<void> {
 
 export function subscribeToIncomingWaves(
   userId: string,
-  callback: (waves: Wave[]) => void
+  callback: (waves: Wave[]) => void,
 ): () => void {
   return wavesRef
     .where('toUserId', '==', userId)
@@ -51,7 +51,7 @@ export function subscribeToIncomingWaves(
 
 export function subscribeToOutgoingWaves(
   userId: string,
-  callback: (waves: Wave[]) => void
+  callback: (waves: Wave[]) => void,
 ): () => void {
   return wavesRef
     .where('fromUserId', '==', userId)

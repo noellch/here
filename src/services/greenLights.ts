@@ -41,7 +41,7 @@ export async function deactivateGreenLight(userId: string): Promise<void> {
 
 export function subscribeToNearbyGreenLights(
   geohashPrefixes: string[],
-  callback: (greenLights: GreenLight[]) => void
+  callback: (greenLights: GreenLight[]) => void,
 ): () => void {
   const unsubscribe = greenLightsRef
     .where('isActive', '==', true)
