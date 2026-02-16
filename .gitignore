@@ -48,8 +48,7 @@ firebase-debug.log
 # Cloud Functions build output
 functions/lib/
 
-# Secrets (do NOT commit)
-GoogleService-Info.plist
+# Android Google Services (not used)
 google-services.json
 
 # EAS
