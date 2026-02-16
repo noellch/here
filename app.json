@@ -8,8 +8,10 @@
     "ios": {
       "bundleIdentifier": "com.here.app",
       "supportsTablet": false,
+      "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Here uses your location to show nearby people on the map."
+        "NSLocationWhenInUseUsageDescription": "Here uses your location to show nearby people on the map.",
+        "ITSAppUsesNonExemptEncryption": false
       },
       "buildNumber": "1"
     },
@@ -42,6 +44,14 @@
           "RNMapboxMapsVersion": "11.13.4"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "root": "./src/app"
+      },
+      "eas": {
+        "projectId": "f200cc51-ef36-4175-a2f0-a640d157ff5a"
+      }
+    }
   }
 }
