@@ -2,4 +2,6 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp()
 
-// Triggers and scheduled functions will be added in Task 11
+export { onWaveCreated, onWaveAccepted } from './triggers/waves'
+export { onReportCreated } from './triggers/reports'
+export { cleanupExpired } from './scheduled/cleanup'
