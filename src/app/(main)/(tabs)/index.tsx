@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { View, Text, StyleSheet, Alert, ActivityIndicator } from 'react-native'
 import MapboxGL from '@rnmapbox/maps'
 import { useStore } from '@nanostores/react'
@@ -22,6 +22,7 @@ import {
 } from '../../../stores/greenLight'
 import { $todayWaveCount, MAX_WAVES_PER_DAY } from '../../../stores/waves'
 import { GreenLight, User, IntentTag } from '../../../types'
+import { OnboardingOverlay, shouldShowOnboarding } from '../../../components/OnboardingOverlay'
 import { colors } from '../../../constants/colors'
 
 import firestore from '@react-native-firebase/firestore'
@@ -42,6 +43,11 @@ export default function MapScreen() {
     null,
   )
   const [intentTag, setIntentTag] = useState<IntentTag>('coffee')
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  useEffect(() => {
+    shouldShowOnboarding().then((show) => setShowOnboarding(show))
+  }, [])
 
   const filteredLights = selectedFilter
     ? nearbyGreenLights.filter((gl) => gl.intentTag === selectedFilter)
@@ -177,6 +183,8 @@ export default function MapScreen() {
           />
         </View>
       )}
+
+      {showOnboarding && <OnboardingOverlay onDismiss={() => setShowOnboarding(false)} />}
     </View>
   )
 }
