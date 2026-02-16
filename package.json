@@ -12,10 +12,10 @@
     "lint:fix": "oxlint --fix ./src",
     "format": "oxfmt ./src",
     "format:check": "oxfmt --check ./src",
-    "version:patch": "npm version patch --no-git-tag-version && node -e \"const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));const a=JSON.parse(fs.readFileSync('app.json','utf8'));a.expo.version=p.version;fs.writeFileSync('app.json',JSON.stringify(a,null,2)+'\\n')\"",
-    "version:minor": "npm version minor --no-git-tag-version && node -e \"const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));const a=JSON.parse(fs.readFileSync('app.json','utf8'));a.expo.version=p.version;fs.writeFileSync('app.json',JSON.stringify(a,null,2)+'\\n')\"",
-    "version:major": "npm version major --no-git-tag-version && node -e \"const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));const a=JSON.parse(fs.readFileSync('app.json','utf8'));a.expo.version=p.version;fs.writeFileSync('app.json',JSON.stringify(a,null,2)+'\\n')\"",
-    "release": "git tag v$(node -p \"require('./package.json').version\") && echo \"Tagged v$(node -p \"require('./package.json').version\"). Push with: git push origin v$(node -p \"require('./package.json').version\")\""
+    "version:patch": "scripts/version.sh patch",
+    "version:minor": "scripts/version.sh minor",
+    "version:major": "scripts/version.sh major",
+    "release": "scripts/version.sh patch --tag"
   },
   "dependencies": {
     "@nanostores/react": "^1.0.0",
