@@ -10,7 +10,8 @@
       "supportsTablet": false,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Here uses your location to show nearby people on the map."
-      }
+      },
+      "buildNumber": "1"
     },
     "plugins": [
       [
