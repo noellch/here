@@ -1,6 +1,7 @@
 {
   "name": "here",
   "version": "1.0.0",
+  "private": true,
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
@@ -37,9 +38,9 @@
   "devDependencies": {
     "@types/ngeohash": "^0.6.8",
     "@types/react": "~19.1.0",
+    "lefthook": "^2.1.1",
     "oxfmt": "^0.32.0",
     "oxlint": "^1.47.0",
     "typescript": "~5.9.2"
-  },
-  "private": true
+  }
 }
