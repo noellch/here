@@ -24,10 +24,11 @@ import { $todayWaveCount, MAX_WAVES_PER_DAY } from '../../../stores/waves'
 import { GreenLight, User, IntentTag } from '../../../types'
 import { OnboardingOverlay, shouldShowOnboarding } from '../../../components/OnboardingOverlay'
 import { colors } from '../../../constants/colors'
+import { ENV } from '../../../constants/env'
 
 import firestore from '@react-native-firebase/firestore'
 
-MapboxGL.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN ?? '')
+MapboxGL.setAccessToken(ENV.MAPBOX_ACCESS_TOKEN)
 
 export default function MapScreen() {
   const { location, error: locationError } = useLocation()
