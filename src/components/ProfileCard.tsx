@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginBottom: 16,
   },
-  tagText: { fontSize: 14 },
+  tagText: { fontSize: 14, color: colors.text },
   waveButton: {
     backgroundColor: colors.primary,
     padding: 14,

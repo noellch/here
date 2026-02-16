@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { View, StyleSheet, Alert, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, Alert, ActivityIndicator } from 'react-native'
 import MapboxGL from '@rnmapbox/maps'
 import { useStore } from '@nanostores/react'
 import { useLocation } from '../../../hooks/useLocation'
@@ -24,10 +24,12 @@ import { $todayWaveCount, MAX_WAVES_PER_DAY } from '../../../stores/waves'
 import { GreenLight, User, IntentTag } from '../../../types'
 import { colors } from '../../../constants/colors'
 
+import firestore from '@react-native-firebase/firestore'
+
 MapboxGL.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN ?? '')
 
 export default function MapScreen() {
-  const { location } = useLocation()
+  const { location, error: locationError } = useLocation()
   useNearbyGreenLights(location)
 
   const authUser = useStore($authUser)
@@ -59,14 +61,15 @@ export default function MapScreen() {
         intentTag,
         durationMinutes: 30,
       })
+      const now = new Date()
       $myGreenLight.set({
         id,
         userId: authUser.uid,
         geohash,
-        geoPoint: { latitude: fuzzed.lat, longitude: fuzzed.lng } as any,
+        geoPoint: new firestore.GeoPoint(fuzzed.lat, fuzzed.lng),
         intentTag,
-        activatedAt: { toDate: () => new Date() } as any,
-        expiresAt: { toDate: () => new Date(Date.now() + 30 * 60 * 1000) } as any,
+        activatedAt: firestore.Timestamp.fromDate(now),
+        expiresAt: firestore.Timestamp.fromDate(new Date(now.getTime() + 30 * 60 * 1000)),
         isActive: true,
       })
     } catch (e: any) {
@@ -82,6 +85,8 @@ export default function MapScreen() {
     try {
       await deactivateGreenLight(authUser.uid)
       $myGreenLight.set(null)
+    } catch (e: any) {
+      Alert.alert('Error', e.message)
     } finally {
       $greenLightLoading.set(false)
     }
@@ -112,6 +117,18 @@ export default function MapScreen() {
       Alert.alert('Error', e.message)
     }
   }, [authUser, selectedUser])
+
+  if (locationError) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text
+          style={{ color: colors.textSecondary, fontSize: 16, textAlign: 'center', padding: 32 }}
+        >
+          {locationError}
+        </Text>
+      </View>
+    )
+  }
 
   if (!location) {
     return (

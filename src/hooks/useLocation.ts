@@ -20,10 +20,14 @@ export function useLocation() {
   }, [])
 
   async function refresh() {
-    const loc = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.Balanced,
-    })
-    setLocation({ lat: loc.coords.latitude, lng: loc.coords.longitude })
+    try {
+      const loc = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      })
+      setLocation({ lat: loc.coords.latitude, lng: loc.coords.longitude })
+    } catch {
+      setError('Failed to get location')
+    }
   }
 
   return { location, error, refresh }
