@@ -2,10 +2,12 @@ import { useEffect } from 'react'
 import { Slot, useRouter, useSegments } from 'expo-router'
 import { useStore } from '@nanostores/react'
 import { useAuthListener } from '../hooks/useAuth'
+import { useNotifications } from '../hooks/useNotifications'
 import { $authUser, $authLoaded, $profileComplete } from '../stores/auth'
 
 export default function RootLayout() {
   useAuthListener()
+  useNotifications()
 
   const authUser = useStore($authUser)
   const authLoaded = useStore($authLoaded)
