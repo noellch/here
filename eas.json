@@ -8,7 +8,7 @@
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
-        "autoIncrement": true
+        "simulator": true
       }
     },
     "preview": {
